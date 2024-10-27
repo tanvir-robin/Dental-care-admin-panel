@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AdminDashboard extends StatefulWidget {
+  const AdminDashboard({super.key});
+
   @override
   _AdminDashboardState createState() => _AdminDashboardState();
 }
@@ -105,7 +107,7 @@ class _AdminDashboardState extends State<AdminDashboard>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dental Care Admin Dashboard"),
+        title: const Text("Dental Care Admin Dashboard"),
         backgroundColor: Colors.teal,
       ),
       body: Container(
@@ -125,16 +127,16 @@ class _AdminDashboardState extends State<AdminDashboard>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildSummarySection(),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   _buildSectionTitle("Available Doctors"),
                   _buildDoctorList(),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   _buildSectionTitle("Appointments"),
                   _buildAppointmentList(),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   _buildSectionTitle("Transactions"),
                   _buildTransactionList(),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   _buildSectionTitle("Patients Registered"),
                   _buildUserList(),
                 ],
@@ -149,7 +151,7 @@ class _AdminDashboardState extends State<AdminDashboard>
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.bold,
         color: Colors.white,
@@ -164,7 +166,7 @@ class _AdminDashboardState extends State<AdminDashboard>
         _buildSummaryCard("Total Users", users.length.toString()),
         _buildSummaryCard("Appointments", appointments.length.toString()),
         _buildSummaryCard(
-            "Total Transactions", "BDT " + _getTotalTransactionAmount()),
+            "Total Transactions", "BDT ${_getTotalTransactionAmount()}"),
       ],
     );
   }
@@ -182,9 +184,11 @@ class _AdminDashboardState extends State<AdminDashboard>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(title,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-              SizedBox(height: 10),
-              Text(value, style: TextStyle(fontSize: 26, color: Colors.teal)),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 18)),
+              const SizedBox(height: 10),
+              Text(value,
+                  style: const TextStyle(fontSize: 26, color: Colors.teal)),
             ],
           ),
         ),
@@ -194,7 +198,7 @@ class _AdminDashboardState extends State<AdminDashboard>
 
   Widget _buildDoctorList() {
     return SizedBox(
-      height: 200,
+      height: 280,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: demoAvailableDoctors.length,
@@ -208,7 +212,7 @@ class _AdminDashboardState extends State<AdminDashboard>
   Widget _buildDoctorCard(AvailableDoctor doctor) {
     return Card(
       elevation: 5,
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: SizedBox(
         width: 130,
@@ -217,27 +221,26 @@ class _AdminDashboardState extends State<AdminDashboard>
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.asset(doctor.image,
-                  height: 80, width: 80, fit: BoxFit.cover),
+              child: Image.asset(doctor.image, width: 80, fit: BoxFit.cover),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(doctor.name,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.teal),
                 textAlign: TextAlign.center),
             Text(doctor.sector,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 12,
                     fontStyle: FontStyle.italic,
                     color: Colors.grey),
                 textAlign: TextAlign.center),
             Text("${doctor.experience} years",
-                style: TextStyle(fontSize: 12, color: Colors.teal),
+                style: const TextStyle(fontSize: 12, color: Colors.teal),
                 textAlign: TextAlign.center),
             Text("${doctor.patients} patients",
-                style: TextStyle(fontSize: 12, color: Colors.teal),
+                style: const TextStyle(fontSize: 12, color: Colors.teal),
                 textAlign: TextAlign.center),
           ],
         ),
@@ -248,25 +251,25 @@ class _AdminDashboardState extends State<AdminDashboard>
   Widget _buildAppointmentList() {
     return ListView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: appointments.length,
       itemBuilder: (context, index) {
         final appointment = appointments[index];
         return Card(
           elevation: 5,
-          margin: EdgeInsets.symmetric(vertical: 8),
+          margin: const EdgeInsets.symmetric(vertical: 8),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: ListTile(
             title: Text("Doctor: ${getDoctorName(appointment['doctorId'])}",
-                style: TextStyle(color: Colors.teal)),
+                style: const TextStyle(color: Colors.teal)),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("Patient: ${getPatientName(appointment['patientDocID'])}",
-                    style: TextStyle(color: Colors.grey)),
+                    style: const TextStyle(color: Colors.grey)),
                 Text("Complaint: ${(appointment['complaint'])}",
-                    style: TextStyle(color: Colors.grey)),
+                    style: const TextStyle(color: Colors.grey)),
               ],
             ),
             trailing:
@@ -282,33 +285,33 @@ class _AdminDashboardState extends State<AdminDashboard>
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: ListView.builder(
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: transactions.length,
         itemBuilder: (context, index) {
           final transaction = transactions[index];
           return Card(
             elevation: 5,
-            margin: EdgeInsets.symmetric(vertical: 8),
+            margin: const EdgeInsets.symmetric(vertical: 8),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: ListTile(
               title: Text("Trx ID: ${transaction['tran_id']}",
-                  style: TextStyle(color: Colors.teal)),
+                  style: const TextStyle(color: Colors.teal)),
               subtitle: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Amount: ${transaction['amount']} BDT",
-                      style: TextStyle(color: Colors.grey)),
+                      style: const TextStyle(color: Colors.grey)),
                   Text("${transaction['card_type']}",
-                      style: TextStyle(color: Colors.grey)),
+                      style: const TextStyle(color: Colors.grey)),
                   Text("User: ${getPatientName(transaction['user'])}",
-                      style: TextStyle(color: Colors.grey)),
+                      style: const TextStyle(color: Colors.grey)),
                 ],
               ),
               trailing: transaction['status'] == 'VALID'
-                  ? Icon(Icons.done_outline_rounded)
-                  : Icon(Icons.cancel),
+                  ? const Icon(Icons.done_outline_rounded)
+                  : const Icon(Icons.cancel),
             ),
           );
         },
@@ -321,20 +324,20 @@ class _AdminDashboardState extends State<AdminDashboard>
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: ListView.builder(
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: users.length,
         itemBuilder: (context, index) {
           final user = users[index];
           return Card(
             elevation: 5,
-            margin: EdgeInsets.symmetric(vertical: 8),
+            margin: const EdgeInsets.symmetric(vertical: 8),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: ListTile(
-              title:
-                  Text(user['username'], style: TextStyle(color: Colors.teal)),
+              title: Text(user['username'],
+                  style: const TextStyle(color: Colors.teal)),
               subtitle: Text(user['email'] ?? 'No Email',
-                  style: TextStyle(color: Colors.grey)),
+                  style: const TextStyle(color: Colors.grey)),
             ),
           );
         },
